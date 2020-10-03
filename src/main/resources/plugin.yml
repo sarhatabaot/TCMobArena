@@ -1,0 +1,7 @@
+name: TC-MobArena
+version: ${project.version}
+main: com.github.sarhatabaot.tcmobarena.TCMobArena
+api-version: 1.16
+depend:
+  - TradingCards
+  - MobArena
