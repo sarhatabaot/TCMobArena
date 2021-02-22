@@ -4,6 +4,8 @@ import com.garbagemule.MobArena.MobArena;
 import com.garbagemule.MobArena.framework.Arena;
 import media.xen.tradingcards.CardUtil;
 import media.xen.tradingcards.TradingCards;
+import media.xen.tradingcards.api.addons.AddonListener;
+import media.xen.tradingcards.api.addons.TradingCardsAddon;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -15,19 +17,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class MobArenaListener implements Listener {
-	private final JavaPlugin plugin;
+public class MobArenaListener extends AddonListener {
 	private final TradingCards tradingCards;
 
-	public MobArenaListener(final TradingCards tradingCards, final JavaPlugin plugin) {
+	public MobArenaListener(final TradingCardsAddon tradingCardsAddon, final TradingCards tradingCards) {
+		super(tradingCardsAddon);
+		this.tradingCards = tradingCards;
+	}
+
+	/*public MobArenaListener(final TradingCards tradingCards, final JavaPlugin plugin) {
 		this.tradingCards = tradingCards;
 		this.plugin = plugin;
-	}
+	}*/
 
 	@EventHandler
 	public void onEntityDeath(EntityDeathEvent event) {
 		MobArena maPlugin = (MobArena) Bukkit.getServer().getPluginManager().getPlugin("MobArena");
-		if (maPlugin == null || !maPlugin.isEnabled() || !plugin.getConfig().getBoolean("disable-in-arena")) {
+		if (maPlugin == null || !maPlugin.isEnabled() || !tradingCardsAddon.getJavaPlugin().getConfig().getBoolean("disable-in-arena")) {
 			return;
 		}
 
@@ -43,7 +49,7 @@ public class MobArenaListener implements Listener {
 		}
 
 		if (drop && !worldBlackList.contains(worldName)) {
-			String rare = tradingCards.calculateRarity(event.getEntityType(), false);
+			String rare = CardUtil.calculateRarity(event.getEntityType(), false);
 			boolean cancelled = false;
 			if (!rare.equalsIgnoreCase("None")) {
 				if (tradingCards.getConfig().getBoolean("General.Spawner-Block") && event.getEntity().getCustomName() != null && event.getEntity().getCustomName().equals(tradingCards.getConfig().getString("General.Spawner-Mob-Name"))) {

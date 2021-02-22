@@ -1,5 +1,5 @@
 # Mob Arena Addon for Trading Cards
-Adds mob arena support for TradingCards.
+Adds mob arena support for [TradingCards](https://github.com/TreasureIslandMC/XenTradingCards).
 
 ### config.yml:
 ```yaml
