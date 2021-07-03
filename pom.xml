@@ -6,7 +6,7 @@
 
     <groupId>com.github.sarhatabaot</groupId>
     <artifactId>TC-MobArena</artifactId>
-    <version>1.0.1-D1</version>
+    <version>1.0.1</version>
     <packaging>jar</packaging>
 
     <name>TC MobArena</name>
@@ -74,10 +74,18 @@
             <version>1.16.5-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
+
         <dependency>
-            <groupId>com.github.TreasureIslandMC</groupId>
-            <artifactId>XenTradingCards</artifactId>
-            <version>5.1.3-D1</version>
+            <groupId>com.github.TreasureIslandMC.TradingCards</groupId>
+            <artifactId>tradingcards-api</artifactId>
+            <version>e4ef8ec654</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.spongepowered</groupId>
+            <artifactId>configurate-yaml</artifactId>
+            <version>4.0.0</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
