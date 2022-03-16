@@ -3,7 +3,6 @@ package com.github.sarhatabaot.tcmobarena;
 import net.tinetwork.tradingcards.api.TradingCardsPlugin;
 import net.tinetwork.tradingcards.api.addons.AddonListener;
 import net.tinetwork.tradingcards.api.addons.TradingCardsAddon;
-import net.tinetwork.tradingcards.api.card.Card;
 import net.tinetwork.tradingcards.api.model.DropType;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
@@ -18,7 +17,7 @@ import java.nio.file.Path;
 
 
 public class MobArenaListener extends AddonListener {
-    private final TradingCardsPlugin<? extends Card<? extends Card>> tradingCards;
+    private final TradingCardsPlugin tradingCards;
     private CommentedConfigurationNode configurationNode;
 
     public MobArenaListener(final TradingCardsAddon tradingCardsAddon, final TradingCardsPlugin tradingCards) {
@@ -58,8 +57,8 @@ public class MobArenaListener extends AddonListener {
 
     private ItemStack getRandomDrop(final String rarity) {
         if (configurationNode.node("use-active-series").getBoolean())
-            return tradingCards.getCardManager().getRandomActiveCard(rarity, false).build();
-        return tradingCards.getCardManager().getRandomCard(rarity, false).build();
+            return tradingCards.getCardManager().getRandomActiveCard(rarity).build(false);
+        return tradingCards.getCardManager().getRandomCard(rarity).build(false);
     }
 
     private boolean canDropPlayer(Player player) {
